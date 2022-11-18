@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::group(['middleware' => 'auth'], function () {
+    //Logout
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('register', [AuthController::class, 'register'])->name('register');
-Route::post('signup', [AuthController::class, 'signup'])->name('singup');
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('signin', [AuthController::class, 'signin'])->name('signin');
+    //Stores
+    Route::resource('stores', StoreController::class);
+});
 
-Route::get('stores', function () {})->name('stores.index');
+
+Route::group(['middleware' => 'guest'], function () {
+    //Register & Login
+    Route::get('register', [AuthController::class, 'register'])->name('register');
+    Route::post('signup', [AuthController::class, 'signup'])->name('singup');
+    Route::get('login', [AuthController::class, 'login'])->name('login');
+    Route::post('signin', [AuthController::class, 'signin'])->name('signin');
+});
+
+
