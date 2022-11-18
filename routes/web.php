@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('signup', [AuthController::class, 'signup'])->name('singup');
 Route::get('login', [AuthController::class, 'login'])->name('login');
