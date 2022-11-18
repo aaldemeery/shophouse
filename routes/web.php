@@ -20,5 +20,7 @@ Route::get('/', function () {
 
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('signup', [AuthController::class, 'signup'])->name('singup');
-Route::get('login', [AuthController::class, 'login'])->name('signin');
+Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('signin', [AuthController::class, 'signin'])->name('signin');
+
+Route::get('stores', function () {})->name('stores.index');

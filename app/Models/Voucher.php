@@ -13,8 +13,13 @@ class Voucher extends Model
 
     protected $fillable = [
         "percentage",
-        "remaning",
+        "remaining",
         "code",
+    ];
+
+    protected $casts = [
+        "percentage" => "integer",
+        "remaining" => "integer",
     ];
 
     public function store(): BelongsTo

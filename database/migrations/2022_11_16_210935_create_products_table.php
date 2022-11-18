@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('store_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->integer('price');
+            $table->text('about')->nullable();
+            $table->decimal('price');
             $table->integer('quantity');
             $table->timestamps();
         });

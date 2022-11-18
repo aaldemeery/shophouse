@@ -7,22 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class review extends Model
+class Review extends Model
 {
     use HasFactory;
 
-    public function review_id()
-    {
-        return $this->morphTo();
-    }
-
     protected $fillable = [
         "title",
-        "content"
+        "content",
+        "rate"
     ];
 
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
+    }
+
+    public function review_id()
+    {
+        return $this->morphTo();
     }
 }

@@ -15,17 +15,16 @@ class AuthController extends Controller
 
     public function signup(Request $request)
     {
-
-
         $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required',
         ]);
 
         $data['password'] = bcrypt($data['password']);
 
         User::create($data);
+
         return to_route('login');
     }
 
@@ -44,7 +43,7 @@ class AuthController extends Controller
         if (Auth::attempt($data)) {
             request()->session()->regenerate();
 
-            dd('succeful');
+            return to_route('stores.index');
         }
 
         return back()->withErrors([

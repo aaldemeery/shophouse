@@ -14,29 +14,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model
 {
     use HasFactory;
-     protected $fillable = [
+
+    protected $fillable = [
         'name',
+        'about',
         'price',
         'quantity',
-     ];
+    ];
 
-     protected $casts = [
-        "price" => "integer",
-        "quantity" => "integer",
-     ];
+    protected $casts = [
+        'price' => 'float',
+        'quantity' => 'integer',
+    ];
 
-     public function images(): HasMany
-     {
+    public function images(): HasMany
+    {
         return $this->hasMany(Image::class);
-     }
+    }
 
-     public function category(): BelongsTo
-     {
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
-     }
+    }
 
-     public function reviews()
-     {
+    public function reviews()
+    {
         return $this->morphMany(Review::class, 'review_id');
-     }
+    }
 }
