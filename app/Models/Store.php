@@ -41,6 +41,6 @@ class Store extends Model
 
     public function reviews()
     {
-       return $this->morphMany(Review::class, 'review_id');
+        return $this->morphMany(Review::class, 'reviewable');
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Review;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\ReviewController;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,6 +40,6 @@ class Product extends Model
 
     public function reviews()
     {
-        return $this->morphMany(Review::class, 'review_id');
+        return $this->morphMany(Review::class, 'reviewable');
     }
 }

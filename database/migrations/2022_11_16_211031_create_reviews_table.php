@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->integer('rate');
-            $table->integer('review_id');
-            $table->string('type');
+            $table->morphs('reviewable');
             $table->timestamps();
         });
     }
