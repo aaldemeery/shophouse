@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Stores
     Route::resource('stores', StoreController::class);
+
+    //Products
+    Route::get('stores/{store}/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('stores/{store}/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('store/{store}/products/store', [ProductController::class, 'store'])->name('products.store');
 });
 
 

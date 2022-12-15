@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New store</title>
+    <title>Add Product</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <?php if (!$errors->isEmpty()) { ?>
         <ul>
@@ -17,21 +17,31 @@
     <?php } ?>
 </head>
 <body>
-    <h1>New store</h1>
+    <h1>Add Product</h1>
     <a href="{{ route('logout') }}">Logout</a> |
-    <a href="{{ route('stores.index') }}">All stores</a>
+    <a href="{{ route('stores.index') }}">All Stores</a> |
+    <a href="{{ route('products.index', ['store' => $store->id])  }}">All Products</a>
     <hr>
-    <form action="{{ route('stores.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('products.store', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf()
 
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
 
-        <label for="image">Image</label>
-        <input type="file" name="image" id="image">
+        <select name="category_id" id="categories">
+            <?php foreach ($categories as $category) {?>
+                <option  value="<?php echo $category['id'];?>" ><?php echo $category['name'];?></option>
+            <?php }?>
+        </select>
 
-        <label for="phone">Phone</label>
-        <input type="text" name="phone" id="phone">
+        <label for="image">Add images</label>
+        <input type="file" name="images[]" id="image" multiple>
+
+        <label for="price">Price</label>
+        <input type="integer" name="price" id="price">
+
+        <label for="quantity">Quantity</label>
+        <input type="integer" name="quantity" id="quantity">
 
         <label for="about">About</label>
         <textarea name="about" id="about" cols="30" rows="10"></textarea>

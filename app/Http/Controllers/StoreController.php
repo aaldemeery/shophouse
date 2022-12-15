@@ -6,6 +6,8 @@ use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CreateStoreRequest;
+use App\Http\Requests\UpdateStoreRequest;
 
 class StoreController extends Controller
 {
@@ -26,20 +28,13 @@ class StoreController extends Controller
         return view('stores/create');
     }
 
-    public function store(Request $request)
+    public function store(CreateStoreRequest $request)
     {
-        $user = Auth::user();
-
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|image',
-            'phone' => 'required|string|max:255',
-            'about' => 'required|string'
-        ]);
-
-        $data['image'] = $data['image']->store('public');
-
-        $user->stores()->create($data);
+        Auth::user()
+            ->stores()
+            ->create(
+                $request->validated()
+            );
 
         return to_route('stores.index');
     }
@@ -51,18 +46,9 @@ class StoreController extends Controller
         ]);
     }
 
-    public function update(Request $request, Store $store)
+    public function update(UpdateStoreRequest $request, Store $store)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|image',
-            'phone' => 'required|string|max:255',
-            'about' => 'required|string'
-        ]);
-
-        $data['image'] = $data['image']->store('public');
-
-        $store->update($data);
+        $store->update($request->validated());
 
         return to_route('stores.index', [
             'store' => $store
