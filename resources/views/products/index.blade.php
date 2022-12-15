@@ -28,7 +28,7 @@
                 <td>{{ $product->price }} $</td>
                 <td>{{ $product->quantity }}</td>
                 <td>
-                    <a href="">Edit</a> |
+                    <a href="{{ route("products.edit", ["store" => $store, "product" => $product]) }}">Edit</a> |
                     <a href="">View</a> |
                     <a href="">Delete</a>
                 </td>
