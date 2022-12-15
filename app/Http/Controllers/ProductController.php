@@ -61,8 +61,6 @@ class ProductController extends Controller
     {
         $product->update($request->validated());
 
-
-
         if(!$request->has('images')) {
             return to_route('products.index', [
                 "product" => $product,
@@ -82,6 +80,12 @@ class ProductController extends Controller
         }
     }
 
+    public function destroy(Store $store, Product $product)
+    {
+        $product->delete();
+
+        return to_route('products.index', ["product" => $product, "store" => $store]);
+    }
     private function uploadImages(array $images): array
     {
         $data = [];

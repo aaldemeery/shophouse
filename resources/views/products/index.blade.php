@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <title>Products</title>
+    <style>
+        .delete-btn {padding: 0 !important;display: inline !important;background: transparent !important;color: var(--links) !important;}
+        .delete-btn:hover {text-decoration: underline;}
+        .delete-form {display: inline !important;vertical-align: middle !important;}
+    </style>
 </head>
 <body>
     <h1>Products</h1>
@@ -30,8 +35,11 @@
                 <td>
                     <a href="{{ route("products.edit", ["store" => $store, "product" => $product]) }}">Edit</a> |
                     <a href="">View</a> |
-                    <a href="">Delete</a>
-                </td>
+                    <form onsubmit="return confirm('Are you sure?');" class="delete-form" action="{{route('products.destroy', ["store" => $store['id'],'product' => $product['id']]) }}" method="POST">
+                        @method('DELETE')
+                        @csrf()
+                        <input class="delete-btn" type="submit" value="Delete">
+                    </form>                </td>
             </tr>
 
         @endforeach
