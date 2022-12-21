@@ -15,6 +15,7 @@
 <body>
     <h1>{{ $user->name }} stores</h1>
     <a href="{{ route('stores.create') }}">New Store</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a> |
     <a href="{{ route('logout') }}">Logout</a>
     <hr>
     <table>

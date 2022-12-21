@@ -20,7 +20,8 @@
     <h1>Add Product</h1>
     <a href="{{ route('logout') }}">Logout</a> |
     <a href="{{ route('stores.index') }}">All Stores</a> |
-    <a href="{{ route('products.index', ['store' => $store->id])  }}">All Products</a>
+    <a href="{{ route('products.index', ['store' => $store->id])  }}">All Products</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a>
     <hr>
     <form action="{{ route('products.store', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf()

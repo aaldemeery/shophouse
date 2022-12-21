@@ -11,7 +11,8 @@
     <h1>{{ $product->name }}</h1>
     <a href="{{ route('logout') }}">Logout</a> |
     <a href="{{ route('stores.index') }}">All Stores</a> |
-    <a href="{{ route('products.index', ['store' => $store->id])  }}">All Products</a>
+    <a href="{{ route('products.index', ['store' => $store->id])  }}">All Products</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a>
     <hr>
     @foreach($images as $image)
     <img src="{{ Storage::url($image->path) }}" alt="Product image" width="256" style="margin: 3px;">

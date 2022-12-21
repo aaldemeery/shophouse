@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WalletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('store/{store}/products/{product}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('stores/{store}/products/{product}/view', [ProductController::class, 'view'])->name('products.view');
 
-
+    // Wallets
+    Route::resource('wallets', WalletController::class)->only('show');
 });
 
 

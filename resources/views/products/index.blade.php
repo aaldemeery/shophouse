@@ -16,6 +16,7 @@
     <h1>Products</h1>
     <a href="{{ route('stores.index') }}">Stores</a> |
     <a href="{{ route('products.create', ['store' => $store->id]) }}">Add product</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a> |
     <a href="{{ route('logout') }}">Logout</a>
     <hr>
     <table>
