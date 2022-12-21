@@ -28,6 +28,7 @@
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="{{$product['name']}}">
 
+        <label for="categoy">Category</label>
         <select name="category_id" id="categories">
             <?php foreach ($categories as $category) {?>
                 <option  value="<?php echo $category['id'];?>" ><?php echo $category['name'];?></option>
@@ -35,6 +36,9 @@
         </select>
 
         <label for="image">Add images</label>
+        @foreach ($images as $image)
+            <img src="{{ Storage::url($image->path)}}" alt="Product image" width="256" style="display: block; margin: 10px 0;">
+        @endforeach
         <input type="file" name="images[]" id="image" multiple>
 
         <label for="price">Price</label>

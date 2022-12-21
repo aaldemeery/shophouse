@@ -46,38 +46,35 @@ class ProductController extends Controller
     }
 
 
-    public function Edit(Store $store, Product $product)
+    public function edit(Store $store, Product $product)
     {
         $categories = Category::get();
+
+        $images = $product->images()->get();
 
         return view('products.edit', [
             "product" => $product,
             "store" => $store,
             "categories" => $categories,
+            "images" => $images,
         ]);
     }
 
     public function update(UpdateProductRequest $request, Store $store, Product $product)
     {
+
         $product->update($request->validated());
 
-        if(!$request->has('images')) {
-            return to_route('products.index', [
-                "product" => $product,
-                "store" => $store
-            ]);
+        if ($request->has('images')) {
 
-        } else {
+            $product->images()->delete();
 
-        $product->images()->delete();
+            $images = $this->uploadImages($request->validated('images'));
 
-        $images = $this->uploadImages($request->validated('images'));
-
-        $product->images()->createMany($images);
+            $product->images()->createMany($images);
+        }
 
         return to_route('products.index', ["store" => $store, "product" => $product]);
-
-        }
     }
 
     public function destroy(Store $store, Product $product)
@@ -85,6 +82,17 @@ class ProductController extends Controller
         $product->delete();
 
         return to_route('products.index', ["product" => $product, "store" => $store]);
+    }
+
+    public function view(Store $store, Product $product)
+    {
+        $images = $product->images()->get();
+
+        return view("products.show", [
+            "store" => $store,
+            "product" => $product,
+            "images" => $images,
+        ]);
     }
     private function uploadImages(array $images): array
     {

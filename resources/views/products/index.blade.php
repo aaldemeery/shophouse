@@ -34,12 +34,13 @@
                 <td>{{ $product->quantity }}</td>
                 <td>
                     <a href="{{ route("products.edit", ["store" => $store, "product" => $product]) }}">Edit</a> |
-                    <a href="">View</a> |
+                    <a href="{{ route("products.view", ["store" => $store, "product" => $product]) }}">View</a> |
                     <form onsubmit="return confirm('Are you sure?');" class="delete-form" action="{{route('products.destroy', ["store" => $store['id'],'product' => $product['id']]) }}" method="POST">
                         @method('DELETE')
                         @csrf()
                         <input class="delete-btn" type="submit" value="Delete">
-                    </form>                </td>
+                    </form>
+                </td>
             </tr>
 
         @endforeach
