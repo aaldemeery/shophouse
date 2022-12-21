@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\VoucherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('stores/{store}/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('store/{store}/products/store', [ProductController::class, 'store'])->name('products.store');
     Route::get('stores/{store}/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::post('store/{store}/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
     Route::delete('store/{store}/products/{product}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('stores/{store}/products/{product}/view', [ProductController::class, 'view'])->name('products.view');
 
     // Wallets
     Route::resource('wallets', WalletController::class)->only('show');
+
+    // Voucher
+    Route::get('stores/{store}/voucher', [VoucherController::class, 'index'])->name('vouchers.index');
+    Route::get('stores/{store}/voucher/create', [VoucherController::class, 'create'])->name('vouchers.create');
+    Route::post('store/{store}/voucher/store', [voucherController::class, 'store'])->name('vouchers.store');
+    Route::delete('store/{store}/vouchers/{voucher}/delete', [VoucherController::class, 'destroy'])->name('vouchers.destroy');
+    Route::get('stores/{store}/vouchers/{voucher}/edit', [VoucherController::class, 'edit'])->name('vouchers.edit');
+    Route::post('store/{store}/vouchers/{voucher}/update', [VoucherController::class, 'update'])->name('vouchers.update');
 });
 
 
