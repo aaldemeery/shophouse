@@ -23,8 +23,5 @@
     @endif
     <h2>About : </h2>
     <p>{{ $product->about }}</p>
-
-
-
 </body>
 </html>
