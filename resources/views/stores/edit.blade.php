@@ -20,7 +20,8 @@
 <body>
     <h1>Edit store</h1>
     <a href="{{ route('logout') }}">Logout</a> |
-    <a href="{{ route('stores.index') }}">All stores</a>
+    <a href="{{ route('stores.index') }}">All stores</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a>
     <hr>
     <form action="{{ route('stores.update', ['store' => $store['id']]) }}" method="post" enctype="multipart/form-data">
         @method('PUT')

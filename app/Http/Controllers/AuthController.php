@@ -18,12 +18,13 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
-            'password' => 'required',
+            'password' => 'required|confirmed',
         ]);
 
         $data['password'] = bcrypt($data['password']);
 
-        User::create($data);
+        $user = User::create($data);
+        $user->wallet()->create(['balance' => 0.0]);
 
         return to_route('login');
     }

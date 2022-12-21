@@ -19,7 +19,8 @@
 <body>
     <h1>New store</h1>
     <a href="{{ route('logout') }}">Logout</a> |
-    <a href="{{ route('stores.index') }}">All stores</a>
+    <a href="{{ route('stores.index') }}">All stores</a> |
+    <a href="{{ route('wallets.show', $wallet)  }}">Wallet</a>
     <hr>
     <form action="{{ route('stores.store') }}" method="post" enctype="multipart/form-data">
         @csrf()
