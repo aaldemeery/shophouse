@@ -22,12 +22,10 @@ class Store extends Model
         'phone',
     ];
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
 
     public function vouchers(): HasMany
     {
